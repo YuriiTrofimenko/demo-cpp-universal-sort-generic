@@ -6,7 +6,7 @@
 using namespace std;
 
 const int INT_ARRAY_SIZE = 12;
-void bubbleSort(int integers[], int size, int(*compare)(int, int));
+template <typename T> void bubbleSort(T items[], int size, int(*compare)(T, T));
 
 /**
 * Функция сравнения двух целых чисел для сортировки по возрастанию
@@ -20,12 +20,25 @@ int intCompareASC(int x, int y) {
 int intCompareDESC(int x, int y) {
     return y - x;
 }
+/**
+* Функция сравнения двух дробных чисел для сортировки по возрастанию
+*/
+int doubleCompareASC(double x, double y) {
+    return y < x ? 1 : -1;
+}
+/**
+* Функция сравнения двух дробных чисел для сортировки по убыванию
+*/
+int doubleCompareDESC(double x, double y) {
+    return x < y ? 1 : -1;
+}
 
 int main()
 {
     int ints[] = { 1, 20, 20, 42, -80, 0, 10, 20, 20, 20, 5, 20 };
+    double doubles[] = { 1.5, 20.0, 20.01, 42.999, -80.54, 0.1, 10.0, 20.2, 20.3, 20.0, 5.5, 20.0 };
     /**
-    * Вызов функция сортировки
+    * Вызов функции сортировки
     * с передачей ей ссылки на функцию сравнения intCompareASC
     */
     bubbleSort(ints, INT_ARRAY_SIZE, intCompareASC);
@@ -35,18 +48,39 @@ int main()
     }
     std::cout << endl;
     /**
-    * Вызов функция сортировки с передачей ей ссылки на функцию сравнения intCompareDESC
+    * Вызов функции сортировки
+    * с передачей ей ссылки на функцию сравнения doubleCompareASC
+    */
+    bubbleSort(doubles, INT_ARRAY_SIZE, doubleCompareASC);
+    for (int i = 0; i < INT_ARRAY_SIZE; i++)
+    {
+        std::cout << doubles[i] << " ";
+    }
+    std::cout << endl << endl;
+    /**
+    * Вызов функции сортировки с передачей ей ссылки на функцию сравнения intCompareDESC
     */
     bubbleSort(ints, INT_ARRAY_SIZE, intCompareDESC);
     for (int i = 0; i < INT_ARRAY_SIZE; i++)
     {
         std::cout << ints[i] << " ";
     }
+    std::cout << endl;
+    /**
+    * Вызов функции сортировки
+    * с передачей ей ссылки на функцию сравнения doubleCompareDESC
+    */
+    bubbleSort(doubles, INT_ARRAY_SIZE, doubleCompareDESC);
+    for (int i = 0; i < INT_ARRAY_SIZE; i++)
+    {
+        std::cout << doubles[i] << " ";
+    }
+    std::cout << endl;
 }
 /**
 * Реализация функции сортировки с передачей ей ссылки на функцию сравнения, которая должна принимать два параметра целого типа и возвращать результат целого типа
 */
-void bubbleSort(int integers[], int size, int(*compare)(int, int))
+template <typename T> void bubbleSort(T items[], int size, int(*compare)(T, T))
 {
     bool sorted = false;
     do
@@ -54,11 +88,11 @@ void bubbleSort(int integers[], int size, int(*compare)(int, int))
         sorted = true;
         for (int i = 0; i < size - 1; i++)
         {
-            if (compare(integers[i], integers[i + 1]) > 0)
+            if (compare(items[i], items[i + 1]) > 0)
             {
-                int temp = integers[i];
-                integers[i] = integers[i + 1];
-                integers[i + 1] = temp;
+                T temp = items[i];
+                items[i] = items[i + 1];
+                items[i + 1] = temp;
                 sorted = false;
             }
         }
