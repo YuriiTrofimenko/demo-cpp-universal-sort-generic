@@ -33,6 +33,8 @@ int doubleCompareDESC(double x, double y) {
     return x < y ? 1 : -1;
 }
 
+template <typename T1, typename T2> void foo(T1 x, T2 y, int n);
+
 int main()
 {
     int ints[] = { 1, 20, 20, 42, -80, 0, 10, 20, 20, 20, 5, 20 };
@@ -41,41 +43,44 @@ int main()
     * Вызов функции сортировки
     * с передачей ей ссылки на функцию сравнения intCompareASC
     */
-    bubbleSort(ints, INT_ARRAY_SIZE, intCompareASC);
+    /* bubbleSort(ints, INT_ARRAY_SIZE, intCompareASC);
     for (int i = 0; i < INT_ARRAY_SIZE; i++)
     {
         std::cout << ints[i] << " ";
-    }
-    std::cout << endl;
+    } 
+    std::cout << endl; */
     /**
     * Вызов функции сортировки
     * с передачей ей ссылки на функцию сравнения doubleCompareASC
     */
-    bubbleSort(doubles, INT_ARRAY_SIZE, doubleCompareASC);
+    /* bubbleSort(doubles, INT_ARRAY_SIZE, doubleCompareASC);
     for (int i = 0; i < INT_ARRAY_SIZE; i++)
     {
         std::cout << doubles[i] << " ";
     }
-    std::cout << endl << endl;
+    std::cout << endl << endl; */
     /**
     * Вызов функции сортировки с передачей ей ссылки на функцию сравнения intCompareDESC
     */
-    bubbleSort(ints, INT_ARRAY_SIZE, intCompareDESC);
+    /* bubbleSort(ints, INT_ARRAY_SIZE, intCompareDESC);
     for (int i = 0; i < INT_ARRAY_SIZE; i++)
     {
         std::cout << ints[i] << " ";
     }
-    std::cout << endl;
+    std::cout << endl; */
     /**
     * Вызов функции сортировки
     * с передачей ей ссылки на функцию сравнения doubleCompareDESC
     */
-    bubbleSort(doubles, INT_ARRAY_SIZE, doubleCompareDESC);
+    /* bubbleSort(doubles, INT_ARRAY_SIZE, doubleCompareDESC);
     for (int i = 0; i < INT_ARRAY_SIZE; i++)
     {
         std::cout << doubles[i] << " ";
     }
-    std::cout << endl;
+    std::cout << endl; */
+
+    foo(12, 'A', 5);
+    foo(30.8, 0.99, 5);
 }
 /**
 * Реализация функции сортировки с передачей ей ссылки на функцию сравнения, которая должна принимать два параметра целого типа и возвращать результат целого типа
@@ -97,4 +102,11 @@ template <typename T> void bubbleSort(T items[], int size, int(*compare)(T, T))
             }
         }
     } while (!sorted);
+}
+
+template <typename T1, typename T2> void foo(T1 x, T2 y, int n) {
+    for (int i = 0; i < n; i++)
+    {
+        cout << "x = " << x << "; y = " << y << endl;
+    }
 }
